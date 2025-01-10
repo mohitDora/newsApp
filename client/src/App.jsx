@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-// import Main from "./pages/main";
 import Navbar from "./components/shared/Navbar";
 import Landing from "./pages/Landing";
 import Query from "./pages/Query";

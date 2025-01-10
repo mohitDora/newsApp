@@ -13,6 +13,8 @@ const Main = () => {
   const [text, setText] = useState("");
   const [response, setResponse] = useState([]);
 
+  console.log(response);
+
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const handleChange = (event) => {
@@ -32,9 +34,10 @@ const Main = () => {
       if (res.ok) {
         const data = await res.json();
         const extractedText = data.kwargs?.content || ""; // Ensure to access the correct property
-        setResponse((prev) => [...prev, extractedText]);
+        setResponse((prev) => [...prev, { text, extractedText }]);
         setText(""); // Clear the textarea after sending
       } else {
+        alert("No such message found");
         console.error("Error sending message:", res.statusText);
       }
     } catch (error) {
@@ -49,14 +52,15 @@ const Main = () => {
         value={text}
         onChange={handleChange}
       />
-      <Button disabled={!text.trim()}
-        className="bg-primaryOrange text-black hover:bg-primaryHoverOrange mt-2 rounded-sm border-2 border-primaryBlack text-primaryBlack"
+      <Button
+        disabled={!text.trim()}
+        className="bg-primaryOrange text-black hover:bg-primaryHoverOrange mt-4 rounded-sm border-2 border-primaryBlack text-primaryBlack"
         onClick={handleSendMessage}
       >
         Send message
       </Button>
       {response.length > 0 && (
-        <Card className="bg-transparent">
+        <Card className="bg-transparent mt-4">
           <CardHeader>
             <CardTitle>Server Response</CardTitle>
             <CardDescription>
@@ -66,7 +70,10 @@ const Main = () => {
           <CardContent>
             <ul className="text-primaryBlack list-disc pl-4">
               {response.map((item, index) => (
-                <li key={index}>{item}</li>
+                <div className="mt-4" key={index}>
+                  <p className="text-2xl font-bold mb-2">{item.text}</p>
+                  <li>{item.extractedText}</li>
+                </div>
               ))}
             </ul>
           </CardContent>

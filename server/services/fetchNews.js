@@ -13,7 +13,7 @@ const getYesterdayDate = () => {
   return `${year}-${month}-${day}`;
 };
 
-cron.schedule("0 8 * * *", async () => {
+cron.schedule("0 14 * * *", async () => {
   try {
     console.log("Fetching and upserting articles...");
     const yesterdayDate = getYesterdayDate();
