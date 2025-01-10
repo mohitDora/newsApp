@@ -1,9 +1,9 @@
-const { initPinecone } = require("../config/pineconeClient");
-const { generateEmbeddings } = require("./embeddingService");
+import { initPinecone } from "../config/pineconeClient.js";
+import { generateEmbeddings } from "./embeddingService.js";
 
 const indexName = process.env.INDEX_NAME;
 
-const createIndex = async () => {
+export const createIndex = async () => {
   try {
     const pinecone = await initPinecone();
     const response = await pinecone.listIndexes();
@@ -34,7 +34,7 @@ const createIndex = async () => {
   }
 };
 
-const deleteIndex = async () => {
+export const deleteIndex = async () => {
   try {
     const pinecone = await initPinecone();
     await pinecone.deleteIndex(indexName);
@@ -44,7 +44,7 @@ const deleteIndex = async () => {
   }
 };
 
-const upsertDocuments = async (articles) => {
+export const upsertDocuments = async (articles) => {
   try {
     const pinecone = await initPinecone();
     const index = pinecone.Index(indexName);
@@ -70,7 +70,7 @@ const upsertDocuments = async (articles) => {
   }
 };
 
-const queryDocuments = async (query) => {
+export const queryDocuments = async (query) => {
   try {
     const pinecone = await initPinecone();
     const index = pinecone.Index(indexName);
@@ -87,11 +87,4 @@ const queryDocuments = async (query) => {
   } catch (error) {
     console.error("Error querying documents:", error);
   }
-};
-
-module.exports = {
-  createIndex,
-  deleteIndex,
-  upsertDocuments,
-  queryDocuments,
 };

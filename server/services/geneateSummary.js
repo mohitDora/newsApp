@@ -1,4 +1,4 @@
-const { ChatGroq } = require("@langchain/groq");
+import { ChatGroq } from "@langchain/groq";
 
 const llm = new ChatGroq({
   model: "mixtral-8x7b-32768",
@@ -6,7 +6,7 @@ const llm = new ChatGroq({
   apiKey: process.env.GROQ_API_KEY,
   maxTokens: 200,
 });
-const generateSummary = async (text) => {
+export const generateSummary = async (text) => {
     console.log(text);
 
     const messages=[
@@ -23,6 +23,3 @@ const generateSummary = async (text) => {
     const summary = await llm.invoke(messages);
     return summary;
 }
-
-
-module.exports = { generateSummary };

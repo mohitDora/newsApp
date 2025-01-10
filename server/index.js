@@ -1,9 +1,12 @@
-require("dotenv").config();
-const { initPinecone } = require("./config/pineconeClient");
-const { generateSummary } = require("./services/geneateSummary");
-const { queryDocuments } = require("./services/pineconeService");
-const express = require("express");
-const cors = require("cors");
+import dotenv from "dotenv";
+import { initPinecone } from "./config/pineconeClient.js";
+import { generateSummary } from "./services/geneateSummary.js";
+import { queryDocuments } from "./services/pineconeService.js";
+import express, { json } from "express";
+import cors from "cors";
+
+dotenv.config();
+// import { news } from "./services/fetchNews.js";
 const app = express();
 const corsOptions = {
   origin: ["http://localhost:5173", "https://dialogue-nine.vercel.app"],
@@ -13,11 +16,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(json());
 
 initPinecone();
 
-app.get("/", (req, res) => {
+app.get("/", async(req, res) => {
+  // await news();
   res.send("Hello World");
 });
 

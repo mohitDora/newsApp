@@ -1,11 +1,11 @@
-const { Pinecone } = require("@pinecone-database/pinecone");
-const dotenv = require("dotenv");
+import { Pinecone } from "@pinecone-database/pinecone";
+import { config } from "dotenv";
 
-dotenv.config();
+config();
 
 let pineconeInstance;
 
-const initPinecone = async () => {
+export const initPinecone = async () => {
   if (!process.env.PINECONE_API_KEY || !process.env.INDEX_NAME) {
     throw new Error(
       "PINECONE_API_KEY and INDEX_NAME must be set in the environment."
@@ -18,5 +18,3 @@ const initPinecone = async () => {
   }
   return pineconeInstance;
 };
-
-module.exports = { initPinecone };
