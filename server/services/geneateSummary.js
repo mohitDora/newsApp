@@ -1,7 +1,7 @@
 import { ChatGroq } from "@langchain/groq";
 
 const llm = new ChatGroq({
-  model: "mixtral-8x7b-32768",
+  model: "llama-3.2-3b-preview",
   temperature: 0,
   apiKey: process.env.GROQ_API_KEY,
   maxTokens: 200,

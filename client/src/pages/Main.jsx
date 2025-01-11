@@ -30,6 +30,7 @@ const Main = () => {
         },
         body: JSON.stringify({ query: text.trim() }),
       });
+      console.log(res)
 
       if (res.ok) {
         const data = await res.json();
