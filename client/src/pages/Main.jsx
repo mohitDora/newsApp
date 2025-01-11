@@ -12,6 +12,7 @@ import { useState } from "react";
 const Main = () => {
   const [text, setText] = useState("");
   const [response, setResponse] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -20,6 +21,7 @@ const Main = () => {
   };
 
   const handleSendMessage = async () => {
+    setIsLoading(true); // Start loading
     try {
       const res = await fetch(`${BASE_URL}/query`, {
         method: "POST",
@@ -40,6 +42,8 @@ const Main = () => {
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -52,11 +56,13 @@ const Main = () => {
         className="border-2 border-primaryBlack rounded-sm"
       />
       <Button
-        disabled={!text.trim()}
-        className="bg-primaryOrange text-black hover:bg-primaryHoverOrange mt-4 rounded-sm border-2 border-primaryBlack text-primaryBlack"
+        disabled={!text.trim() || isLoading} // Disable button while loading
+        className={`bg-primaryOrange text-black hover:bg-primaryHoverOrange mt-4 rounded-sm border-2 border-primaryBlack text-primaryBlack ${
+          isLoading && "opacity-50 cursor-not-allowed"
+        }`}
         onClick={handleSendMessage}
       >
-        Send message
+        {isLoading ? "Searching..." : "Send message"} {/* Show Searching... */}
       </Button>
       {response.length > 0 && (
         <Card className="bg-transparent mt-4">
