@@ -1,6 +1,7 @@
 import { Button } from "../ui/button";
+import PropTypes from 'prop-types';
 
-function Hero() {
+function Hero({handleClick}) {
   return (
     <div className="flex flex-col mt-12 items-start">
       <div className="font-bold font-montserrat text-4xl mb-8 text-primaryBlack">
@@ -19,6 +20,7 @@ function Hero() {
         </Button>
         <Button
           size="lg"
+          onClick={handleClick}
           className=" bg-primaryWhite hover:bg-primaryHoverOrange text-md rounded-sm border-2 border-primaryBlack text-primaryBlack"
         >
           Try it Now!
@@ -27,5 +29,8 @@ function Hero() {
     </div>
   );
 }
+Hero.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default Hero;

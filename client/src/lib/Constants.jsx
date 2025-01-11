@@ -3,7 +3,7 @@ import { History, Boxes, TextCursorInput } from "lucide-react";
 export const NavItems = [
   { id: 1, name: "Home", link: "/" },
   { id: 2, name: "Query", link: "/query" },
-  { id: 3, name: "Genre", link: "/genre" },
+  // { id: 3, name: "Genre", link: "/genre" },
 ];
 
 export const features = [

@@ -6,10 +6,9 @@ import express, { json } from "express";
 import cors from "cors";
 
 dotenv.config();
-// import { news } from "./services/fetchNews.js";
 const app = express();
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://dialogue-nine.vercel.app"],
+  origin: ["http://localhost:5173", "https://news-app-alpha-blue.vercel.app"],
   methods: "GET,POST,PUT,DELETE,PATCH,HEAD",
   credentials: true,
   preflightContinue: false,
@@ -21,7 +20,6 @@ app.use(json());
 initPinecone();
 
 app.get("/", async(req, res) => {
-  // await news();
   res.send("Hello World");
 });
 

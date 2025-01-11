@@ -13,8 +13,6 @@ const Main = () => {
   const [text, setText] = useState("");
   const [response, setResponse] = useState([]);
 
-  console.log(response);
-
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const handleChange = (event) => {
@@ -33,9 +31,9 @@ const Main = () => {
 
       if (res.ok) {
         const data = await res.json();
-        const extractedText = data.kwargs?.content || ""; // Ensure to access the correct property
+        const extractedText = data.kwargs?.content || "";
         setResponse((prev) => [...prev, { text, extractedText }]);
-        setText(""); // Clear the textarea after sending
+        setText("");
       } else {
         alert("No such message found");
         console.error("Error sending message:", res.statusText);
@@ -51,6 +49,7 @@ const Main = () => {
         placeholder="Type your message here."
         value={text}
         onChange={handleChange}
+        className="border-2 border-primaryBlack rounded-sm"
       />
       <Button
         disabled={!text.trim()}

@@ -1,5 +1,6 @@
 import { NavItems } from "@/lib/Constants";
-import { Instagram,Github  } from "lucide-react";
+import { Instagram, Github } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -11,9 +12,12 @@ function Footer() {
               NewsApp
             </p>
             <div className="flex space-x-2 mt-2">
-
-            <Instagram size={32}/>
-            <Github size={32}/>
+              <Link to="https://www.instagram.com/mohitdora21" target="_blank">
+                <Instagram size={32} />
+              </Link>
+              <Link to="https://github.com/mohitDora" target="_blank">
+                <Github size={32} />
+              </Link>
             </div>
           </div>
 
